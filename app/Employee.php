@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    //
+    //File Import ****
+
+    public $fillable = ['name','position_id','email','salary'];
+
+
+
+
     public function position(){
         return $this->belongsTo('App\Position');
     }

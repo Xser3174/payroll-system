@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
+// File Export & Import ***
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PositionsImport;
+use App\Exports\PositionsExport;
+use App\Imports\UsersImport;
+
 use App\Position;
 use App\Department;
 
@@ -107,4 +113,26 @@ class PositionController extends Controller
     {
         //
     }
+
+    public function fileImport(Request $request)
+    {
+        Excel::import(new PositionsImport, $request->file('file')->store('temp'));
+        
+    
+    
+        return back();
+    }
+        /**
+         * @return \Illuminate\Support\Collection
+         */
+    public function fileExport()
+    {
+        return Excel::download(new PositionsExport,
+        'positionList.xlsx');
+    } 
+    public function crvFile()
+    {
+        return Excel::download(new PositionsExport,
+        'positionList.csv');
+    } 
 }

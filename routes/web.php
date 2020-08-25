@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,3 +43,14 @@ Route::get('/profile/{id}','ProfileController@show')->name('profileShow');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// File Export****
+//Route::get('file-import-export', 'EmployeeController@fileImportExport');
+Route::post('file/import', 'EmployeeController@fileImport')->name('fileimport');
+Route::get('file/export', 'EmployeeController@fileExport')->name('fileexport');
+
+Route::post('file-import', 'PositionController@fileImport')->name('importposition');
+Route::get('file-export', 'PositionController@fileExport')->name('exportposition');
+Route::get('file-export/csv', 'PositionController@crvFile')->name('exportposition/csv');
+
+Route::get('/employee/pdf','EmployeeController@createPDF');
